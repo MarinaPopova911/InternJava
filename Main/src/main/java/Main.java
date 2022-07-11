@@ -9,7 +9,6 @@ public class Main {
         a = in.nextDouble();
         b = in.nextDouble();
         c = in.nextDouble();
-
         d = Math.pow(b, 2) - 4 * a * c;
         if (d > 0) {
             double x1, x2;
