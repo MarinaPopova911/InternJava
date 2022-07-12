@@ -1,14 +1,11 @@
-import java.util.Scanner;
-
 public class Main {
 
     public static void main(String[] args) {
         double a, b, c, d;
-        System.out.println("Enter a, b, c");
-        Scanner in = new Scanner(System.in);
-        a = in.nextDouble();
-        b = in.nextDouble();
-        c = in.nextDouble();
+
+        a = Double.parseDouble(args[0]);
+        b = Double.parseDouble(args[1]);
+        c = Double.parseDouble(args[2]);
         d = Math.pow(b, 2) - 4 * a * c;
         if (d > 0) {
             double x1, x2;
