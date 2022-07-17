@@ -1,18 +1,18 @@
 package entity;
 
-public class EquationDesign {
+public class Solve {
     private double a, b, c, d;
 
-    public EquationDesign(Double a, Double b, Double c) {
+    public Solve(Double a, Double b, Double c) {
         this.a = a;
         this.b = b;
         this.c = c;
     }
 
-    public void setD(Double a, Double b, Double c) {
+    public double function(Double a, Double b, Double c) {
         Equation equation = new Equation(a, b, c);
         Root root;
-        d = Math.pow(b, 2) - 4 * a * c;
+        Double d = Math.pow(b, 2) - 4 * a * c;
         if (d > 0) {
             Double x1, x2;
             x1 = (-equation.getB() + Math.sqrt(d)) / 2 * equation.getA();
@@ -26,7 +26,6 @@ public class EquationDesign {
             root = new Root();
         }
         root.outputInLog();
+        return 1;
     }
-
-
 }
