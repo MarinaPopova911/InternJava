@@ -31,7 +31,6 @@ public class Root {
     }
 
     public String outputInLog() {
-
         if (x1 != null && x2 != null) {
             return "x1 = " + x1 + " x2 = " + x2;
         } else if (x1 != null) {

@@ -1,3 +1,4 @@
+import entity.Equation;
 import entity.Root;
 import entity.Solve;
 import org.apache.commons.cli.*;
@@ -30,10 +31,9 @@ public class Main {
             a = Double.parseDouble(commandLine.getOptionValue("a"));
             b = Double.parseDouble(commandLine.getOptionValue("b"));
             c = Double.parseDouble(commandLine.getOptionValue("c"));
-            Solve solve = new Solve(a, b, c);
-            root = solve.decide();
-            String result = root.outputInLog();
-            logger.debug(result);
+            Solve solve = new Solve();
+            root = solve.decide(new Equation(a, b, c));
+            logger.debug(root.outputInLog());
         }
     }
 }

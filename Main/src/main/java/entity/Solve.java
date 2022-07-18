@@ -1,18 +1,10 @@
 package entity;
 
 public class Solve {
-    private static double a, b, c, d;
 
-    public Solve(Double a, Double b, Double c) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-    }
-
-    public Root decide() {
-        Equation equation = new Equation(a, b, c);
+    public Root decide(Equation equation) {
         Root root;
-        Double d = Math.pow(b, 2) - 4 * a * c;
+        Double d = Math.pow(equation.getB(), 2) - 4 * equation.getA() * equation.getC();
         if (d > 0) {
             Double x1, x2;
             x1 = (-equation.getB() + Math.sqrt(d)) / 2 * equation.getA();
