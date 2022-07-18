@@ -1,3 +1,4 @@
+import entity.Root;
 import entity.Solve;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
@@ -23,13 +24,16 @@ public class Main {
         } catch (ParseException pe) {
             pe.printStackTrace();
         }
+        Root root;
         if (commandLine.hasOption("a") && commandLine.hasOption("b") && commandLine.hasOption("c")) {
             Double a, b, c;
             a = Double.parseDouble(commandLine.getOptionValue("a"));
             b = Double.parseDouble(commandLine.getOptionValue("b"));
             c = Double.parseDouble(commandLine.getOptionValue("c"));
             Solve solve = new Solve(a, b, c);
-            double result = solve.function(a, b, c);
+            root = solve.decide();
+            String result = root.outputInLog();
+            logger.debug(result);
         }
     }
 }

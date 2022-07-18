@@ -10,7 +10,6 @@ public class Equation {
         this.b = b;
         this.c = c;
     }
-
     public double getA() {
         return a;
     }

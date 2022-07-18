@@ -1,7 +1,7 @@
 package entity;
 
 public class Solve {
-    private double a, b, c, d;
+    private static double a, b, c, d;
 
     public Solve(Double a, Double b, Double c) {
         this.a = a;
@@ -9,7 +9,7 @@ public class Solve {
         this.c = c;
     }
 
-    public double function(Double a, Double b, Double c) {
+    public Root decide() {
         Equation equation = new Equation(a, b, c);
         Root root;
         Double d = Math.pow(b, 2) - 4 * a * c;
@@ -25,7 +25,6 @@ public class Solve {
         } else {
             root = new Root();
         }
-        root.outputInLog();
-        return 1;
+        return root;
     }
 }
