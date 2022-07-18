@@ -1,11 +1,15 @@
+import entity.Equation;
+import entity.Root;
+import entity.Solve;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.apache.log4j.BasicConfigurator;
+
 public class Main {
     private static Logger logger = LoggerFactory.getLogger(Main.class);
+
     public static void main(String[] args) {
-        double a = 0, b = 0, c = 0, d = 0;
         BasicConfigurator.configure();
         Options options = new Options();
         Option optionA = new Option("a", "argument1", true, "");
@@ -21,24 +25,14 @@ public class Main {
         } catch (ParseException pe) {
             pe.printStackTrace();
         }
+        Root root;
         if (commandLine.hasOption("a") && commandLine.hasOption("b") && commandLine.hasOption("c")) {
+            Double a, b, c;
             a = Double.parseDouble(commandLine.getOptionValue("a"));
             b = Double.parseDouble(commandLine.getOptionValue("b"));
             c = Double.parseDouble(commandLine.getOptionValue("c"));
-        }
-        d = Math.pow(b, 2) - 4 * a * c;
-        if (d > 0) {
-            double x1, x2;
-            x1 = (-b + Math.sqrt(d)) / 2 * a;
-            x2 = (-b - Math.sqrt(d)) / 2 * a;
-            logger.debug("x1 = " + x1);
-            logger.debug("x2 = " + x2);
-        } else if (d == 0) {
-            double x;
-            x = -b / 2 * a;
-            logger.debug("x=" + x);
-        } else {
-            logger.debug("The equation has no real roots");
+            root = Solve.decide(new Equation(a, b, c));
+            logger.debug(root.outputInLog());
         }
     }
 }
