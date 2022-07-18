@@ -31,8 +31,7 @@ public class Main {
             a = Double.parseDouble(commandLine.getOptionValue("a"));
             b = Double.parseDouble(commandLine.getOptionValue("b"));
             c = Double.parseDouble(commandLine.getOptionValue("c"));
-            Solve solve = new Solve();
-            root = solve.decide(new Equation(a, b, c));
+            root = Solve.decide(new Equation(a, b, c));
             logger.debug(root.outputInLog());
         }
     }

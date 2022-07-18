@@ -2,7 +2,7 @@ package entity;
 
 public class Solve {
 
-    public Root decide(Equation equation) {
+    public static Root decide(Equation equation) {
         Root root;
         Double d = Math.pow(equation.getB(), 2) - 4 * equation.getA() * equation.getC();
         if (d > 0) {
