@@ -1,8 +1,5 @@
 package entity;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class Root {
     private final Double x1;
     private final Double x2;
