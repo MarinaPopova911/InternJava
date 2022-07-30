@@ -1,11 +1,11 @@
 package entity;
 
 public class Equation {
-    private final double a;
-    private final double b;
-    private final double c;
+    private final Double a;
+    private final Double b;
+    private final Double c;
 
-    public Equation(double a, double b, double c) {
+    public Equation(Double a, Double b, Double c) {
         this.a = a;
         this.b = b;
         this.c = c;
@@ -20,5 +20,11 @@ public class Equation {
 
     public double getC() {
         return c;
+    }
+
+    @Override
+    public String toString() {
+        String equation = a + "x^2+" + b + "x+" + c +"=0";
+        return equation;
     }
 }

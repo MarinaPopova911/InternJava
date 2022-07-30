@@ -1,5 +1,6 @@
 package entity;
 
+
 public class Root {
     private final Double x1;
     private final Double x2;
@@ -27,7 +28,8 @@ public class Root {
         return x2;
     }
 
-    public String outputInLog() {
+    @Override
+    public String toString() {
         if (x1 != null && x2 != null) {
             return "x1 = " + x1 + " x2 = " + x2;
         } else if (x1 != null) {

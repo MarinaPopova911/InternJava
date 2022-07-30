@@ -1,11 +1,11 @@
 import entity.Equation;
 import entity.Root;
-import entity.Solve;
+import service.Solver;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class testEquation {
+public class testSolver {
     @DataProvider(name = "equastion_dataprovider")
     public Object[][] dpEquastion() {
         return new Object[][]{
@@ -20,7 +20,7 @@ public class testEquation {
     @Test(dataProvider = "equastion_dataprovider")
     public void testEquation(Double a, Double b, Double c, Double x1, Double x2) {
         Root root;
-        root = Solve.decide(new Equation(a, b, c));
+        root = Solver.decide(new Equation(a, b, c));
         Assert.assertEquals(root.getX1(), x1);
         Assert.assertEquals(root.getX2(), x2);
     }
