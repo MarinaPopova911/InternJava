@@ -1,14 +1,17 @@
 package service;
 
 import entity.Equation;
-import exeptions.ParseArgumentEquastionExeption;
+import exceptions.ParseArgumentEquationException;
 import org.apache.commons.cli.*;
 import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ParserArgumentEquation {
 
-    public static Equation parse(String[] args) throws ParseArgumentEquastionExeption{
-        Equation equation = null;
+    private static Logger logger = LoggerFactory.getLogger(ParserArgumentEquation.class);
+
+    public static Equation parse(String[] args) throws ParseArgumentEquationException {
         BasicConfigurator.configure();
         Options options = new Options();
         Option optionA = new Option("a", "argument1", true, "");
@@ -22,21 +25,16 @@ public class ParserArgumentEquation {
         try {
             commandLine = parser.parse(options, args);
         } catch (ParseException pe) {
-            pe.printStackTrace();
+            logger.error(pe.getMessage());
+            throw new ParseArgumentEquationException();
         }
-            if (commandLine.hasOption("a") && commandLine.hasOption("b") && commandLine.hasOption("c")) {
-                Double a = Double.parseDouble(commandLine.getOptionValue("a"));
-                Double b = Double.parseDouble(commandLine.getOptionValue("b"));
-                Double c = Double.parseDouble(commandLine.getOptionValue("c"));
-                equation = new Equation(a, b, c);
-            }
-            else {
-                try {
-                    throw  new ParseArgumentEquastionExeption();
-                } catch (ParseArgumentEquastionExeption e) {
-                 System.out.println(e.printExeption());
-                }
-            }
-        return equation;
+        if (commandLine.hasOption("a") && commandLine.hasOption("b") && commandLine.hasOption("c")) {
+            Double a = Double.parseDouble(commandLine.getOptionValue("a"));
+            Double b = Double.parseDouble(commandLine.getOptionValue("b"));
+            Double c = Double.parseDouble(commandLine.getOptionValue("c"));
+            return new Equation(a, b, c);
+        } else {
+            throw new ParseArgumentEquationException();
+        }
     }
 }

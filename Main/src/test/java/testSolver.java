@@ -6,22 +6,22 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class testSolver {
-    @DataProvider(name = "equastion_dataprovider")
-    public Object[][] dpEquastion() {
+    @DataProvider(name = "equation_data provider")
+    public Object[][] dpEquation() {
+
         return new Object[][]{
-                {1.0, 12.0, 36.0, -6.0, null},
-                {2.0, 5.0, -3.0, 0.5, -3.0},
-                {2.0, 1.0, 67.0, null, null},
-                {4.0, 11.0, 107.0, null, null},
-                {1.0, 4.0, 3.0, -1.0, -3.0}
+                {new Equation(1.0, 12.0, 36.0), new Root(-6.0, null)},
+                {new Equation(2.0, 5.0, -3.0), new Root(0.5, -3.0)},
+                {new Equation(2.0, 1.0, 67.0), new Root(null, null)},
+                {new Equation(4.0, 11.0, 107.0), new Root(null, null)},
+                {new Equation(1.0, 4.0, 3.0), new Root(-1.0, -3.0)}
         };
     }
 
-    @Test(dataProvider = "equastion_dataprovider")
-    public void testEquation(Double a, Double b, Double c, Double x1, Double x2) {
-        Root root;
-        root = Solver.decide(new Equation(a, b, c));
-        Assert.assertEquals(root.getX1(), x1);
-        Assert.assertEquals(root.getX2(), x2);
+    @Test(dataProvider = "equation_data provider")
+    public void testEquation(Equation equation, Root x) {
+        Root root = Solver.decide(equation);
+        Assert.assertEquals("x = " + root.getX1(),  x.getX1());
+        Assert.assertEquals("x = " + root.getX2(),  x.getX2());
     }
 }
