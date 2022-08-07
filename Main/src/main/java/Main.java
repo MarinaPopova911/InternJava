@@ -1,6 +1,7 @@
 import entity.Equation;
 import entity.Root;
 import exceptions.ParseArgumentEquationException;
+import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.ParserArgumentEquation;

@@ -26,7 +26,6 @@ public class ParserArgumentEquation {
             commandLine = parser.parse(options, args);
         } catch (ParseException pe) {
             logger.error(pe.getMessage());
-            throw new ParseArgumentEquationException();
         }
         if (commandLine.hasOption("a") && commandLine.hasOption("b") && commandLine.hasOption("c")) {
             Double a = Double.parseDouble(commandLine.getOptionValue("a"));
