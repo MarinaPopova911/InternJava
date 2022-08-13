@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import service.ParserArgumentEquation;
 import service.Solver;
 
+import java.util.regex.Pattern;
+
 public class Main {
     private static Logger logger = LoggerFactory.getLogger(Main.class);
 
