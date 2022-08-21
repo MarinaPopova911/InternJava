@@ -1,5 +1,6 @@
 package service;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import entity.Equation;
 import exceptions.ParseArgumentEquationException;
 import org.apache.commons.cli.*;
@@ -19,11 +20,13 @@ public class ParserArgumentEquation {
         BasicConfigurator.configure();
         Equation equation = null;
         Options options = new Options();
-        Option optionType = new Option("type", "argument1", true, "");
+        Option optionType = new Option("type", "type", true, "");
+        Option optionE = new Option("e", "e", true, "");
         Option optionA = new Option("a", "argument2", true, "");
         Option optionB = new Option("b", "argument3", true, "");
         Option optionC = new Option("c", "argument4", true, "");
         options.addOption(optionType);
+        options.addOption(optionE);
         options.addOption(optionA);
         options.addOption(optionB);
         options.addOption(optionC);
@@ -43,18 +46,19 @@ public class ParserArgumentEquation {
             } else {
                 throw new ParseArgumentEquationException();
             }
-        }
-        if (commandLine.hasOption("type") && commandLine.getOptionValue("type").equals("equation")) {
-            if (commandLine.hasOption("x^2") && commandLine.hasOption("x") && commandLine.hasOption("c")) {
-                Double a = Double.parseDouble(commandLine.getOptionValue("x^2"));
-                Double b = Double.parseDouble(commandLine.getOptionValue("x"));
-                Double c = Double.parseDouble(commandLine.getOptionValue("c"));
+        } else if (commandLine.hasOption("type") && commandLine.getOptionValue("type").equals("equation") &&commandLine.hasOption("e")) {
+            String eq = commandLine.getOptionValue("e");
+            Pattern compile = Pattern.compile("([-]?[1.0-9.0]{1,})x\\^2([+-][1.0-9.0]{1,})x([+-][0-9]{1,})=0");
+            Matcher matcher = compile.matcher(eq);
+            while (matcher.find()) {
+                Double a = Double.valueOf(matcher.group(1));
+                Double b = Double.valueOf(matcher.group(2));
+                Double c = Double.valueOf(matcher.group(3));
                 equation = new Equation(a, b, c);
-            } else {
-                throw new ParseArgumentEquationException();
             }
+        } else {
+            throw new ParseArgumentEquationException();
         }
         return equation;
     }
 }
-

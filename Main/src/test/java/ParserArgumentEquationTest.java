@@ -10,9 +10,11 @@ public class ParserArgumentEquationTest {
     @DataProvider(name = "parserArgumentEquationDataProvider")
     public Object[][] dbParserArgumentEquation() {
         return new Object[][]{
-                {new String[]{"-a=1", "-b=12", "-c=36"}, new Equation(1.0, 12.0, 36.0)},
-                {new String[]{"-a=7", "-b=-1", "-c=-5"}, new Equation(7.0, -1.0, -5.0)},
-                {new String[]{"-a=4", "-b=-1", "-c=-5"}, new Equation(4.0, -1.0, -5.0)}
+                {new String[]{"-type=coeff", "-a=1", "-b=12", "-c=36"}, new Equation(1.0, 12.0, 36.0)},
+                {new String[]{"-type=coeff", "-a=7", "-b=-1", "-c=-5"}, new Equation(7.0, -1.0, -5.0)},
+                {new String[]{"-type=coeff","-a=4", "-b=-1", "-c=-5"}, new Equation(4.0, -1.0, -5.0)},
+                {new String[]{"-type=equation","-e=-6.2x^2+9.3x-10=0"}, new Equation(-6.2, 9.3, -10.0)},
+                {new String[]{"-type=equation","-e=2.0x^2-3.0x+5=0"}, new Equation(2.0, -3.0, 5.0)}
         };
     }
 
@@ -21,7 +23,12 @@ public class ParserArgumentEquationTest {
         return new Object[][]{
                 {new String[]{"-a=1", "-b=12"}},
                 {new String[]{"-a=рнрs", "-c=12"}},
-                {new String[]{"-a=3"}}
+                {new String[]{"-a=3"}},
+                {new String[]{"-type=equation", "-a=4", "-b=-1", "-c=-5"}},
+                {new String[]{"-type=earg", "-a=4", "-b=-1", "-c=-5"}},
+                {new String[]{"-type=coeff", "-e=2.0x^2-3.0x+5=0"}},
+                {new String[]{"-type=equation", "-a=4", "-b=-1"}},
+
         };
     }
 
