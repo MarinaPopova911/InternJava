@@ -1,38 +1,26 @@
 import entity.Equation;
 import entity.Root;
-import entity.Solve;
-import org.apache.commons.cli.*;
+import exceptions.ParseArgumentEquationException;
+import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.log4j.BasicConfigurator;
+import service.ParserArgumentEquation;
+import service.Solver;
+
+import java.util.regex.Pattern;
 
 public class Main {
     private static Logger logger = LoggerFactory.getLogger(Main.class);
 
-    public static void main(String[] args) {
-        BasicConfigurator.configure();
-        Options options = new Options();
-        Option optionA = new Option("a", "argument1", true, "");
-        Option optionB = new Option("b", "argument2", true, "");
-        Option optionC = new Option("c", "argument3", true, "");
-        options.addOption(optionA);
-        options.addOption(optionB);
-        options.addOption(optionC);
-        CommandLineParser parser = new DefaultParser();
-        CommandLine commandLine = null;
+    public static void main(String[] args) throws ParseArgumentEquationException {
+        Equation equation;
         try {
-            commandLine = parser.parse(options, args);
-        } catch (ParseException pe) {
-            pe.printStackTrace();
-        }
-        Root root;
-        if (commandLine.hasOption("a") && commandLine.hasOption("b") && commandLine.hasOption("c")) {
-            Double a, b, c;
-            a = Double.parseDouble(commandLine.getOptionValue("a"));
-            b = Double.parseDouble(commandLine.getOptionValue("b"));
-            c = Double.parseDouble(commandLine.getOptionValue("c"));
-            root = Solve.decide(new Equation(a, b, c));
-            logger.debug(root.outputInLog());
+            equation = ParserArgumentEquation.parse(args);
+            Root root = Solver.decide(equation);
+            logger.debug(equation.toString());
+            logger.debug(root.toString());
+        } catch (ParseArgumentEquationException e) {
+            logger.error(e.getMessage());
         }
     }
 }

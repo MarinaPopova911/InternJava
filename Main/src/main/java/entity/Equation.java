@@ -1,24 +1,35 @@
 package entity;
 
 public class Equation {
-    private final double a;
-    private final double b;
-    private final double c;
+    private final Double a;
+    private final Double b;
+    private final Double c;
 
-    public Equation(double a, double b, double c) {
+    public Equation(Double a, Double b, Double c) {
         this.a = a;
         this.b = b;
         this.c = c;
     }
-    public double getA() {
+    public Double getA() {
         return a;
     }
 
-    public double getB() {
+    public Double getB() {
         return b;
     }
 
-    public double getC() {
+    public Double getC() {
         return c;
+    }
+
+    @Override
+    public String toString() {
+        return a + "x^2+" + b + "x+" + c +"=0";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Equation o = (Equation) obj;
+        return this.a.equals(o.a) && this.b.equals(o.b) && this.c.equals(o.c);
     }
 }
